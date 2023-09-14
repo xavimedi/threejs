@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThreeJS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+    <style>
+    body{margin: 0;}
+    canvas{display: block;}
+    h1{position: absolute; display: flex; font-family: 'Comfortaa', cursive; margin: 15%; color: white;}
+    h4{position: absolute; display: flex; font-family: 'Comfortaa', cursive; margin: 17%; color: white;}
+    div{position: absolute; display: flex; font-family: 'Comfortaa', cursive; margin: 19%; color: white;}
+    a{text-decoration: none; color: white; transition: 0.3s;}
+    a:hover{font-size: 25px;}
+    li{list-style: none; margin: 50px;}
+
+    .main{position: absolute; background-color: white; margin: 300px 5%; padding: 50px;}
+    </style>
+</head>
+<body>
+
+    <h1>Xavier Medina</h1>
+    <h4>Designer & Developer</h4>
+    
+    <div>
+        <ul>
+            <li><a href="#">projects</a></li>
+            <li><a href="https://www.github.com/xavimedi" target="blank">github</a></li>
+            <li><a href="#">contact</a></li>
+
+        </ul>
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+    <script>
+
+    var scene = new THREE.Scene();
+    
+    var camera = new THREE.PerspectiveCamera(
+        50,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+    )
+    camera.position.z = 3;
+
+    var renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setClearColor("#e5e5e5");
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    document.body.appendChild(renderer.domElement);
+
+    var light = new THREE.DirectionalLight(0xfff0dd, 1);
+            light.position.set(0, 5, 10);
+            scene.add(light);
+            
+    window.addEventListener("resize", () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+
+        camera.updateProjectionMatrix();
+    });
+
+    var raycaster = new THREE.Raycaster();
+    var mouse = new THREE.Vector2();
+
+    let icosahedron = new THREE.IcosahedronGeometry(2, 0);
+
+    const milk = new THREE.MeshLambertMaterial({color: 0xff4af23});
+    const blood = new THREE.MeshLambertMaterial({color: 0xff00c1});
+    const water = new THREE.MeshLambertMaterial({ color: 0x01cdfe });
+    const grass = new THREE.MeshLambertMaterial({ color: 0x05ffa1 });
+    const purp = new THREE.MeshLambertMaterial({ color: 0x9600ff });
+
+    const milkIso = new THREE.Mesh(icosahedron, milk);
+    const bloodIso = new THREE.Mesh(icosahedron, blood);
+    const waterIso = new THREE.Mesh(icosahedron, water);
+    const grassIso = new THREE.Mesh(icosahedron, grass);
+    const purpIso = new THREE.Mesh(icosahedron, purp);
+    
+    scene.add(waterIso);
+    scene.add(grassIso);
+    scene.add(milkIso);
+    scene.add(bloodIso);
+    scene.add(purpIso);
+
+    var render = function () {
+        requestAnimationFrame(render);
+        milkIso.rotation.x += 0.001
+        milkIso.rotation.y += 0.002
+
+        bloodIso.rotation.x += 0.003
+        bloodIso.rotation.y += 0.004
+
+        waterIso.rotation.x += 0.005
+        waterIso.rotation.y += 0.006
+
+        grassIso.rotation.x += 0.007
+        grassIso.rotation.y += 0.008
+
+        purpIso.rotation.x += 0.009
+        purpIso.rotation.y += 0.01
+
+        renderer.render(scene, camera);
+    }
+
+    render();
+
+    </script>
+</body>
+</html>
