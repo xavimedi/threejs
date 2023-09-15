@@ -40,18 +40,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
     <script>
         var scene = new THREE.Scene();
-        scene.fog = new THREE.Fog(0xcccccc, 10, 15);
 
-        var camera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 7;
+        var camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 6;
 
         var renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setClearColor("#000000");
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
-        var light = new THREE.DirectionalLight(0xffffff, 1);
-        light.position.set(4, 4, 2);
+        var light = new THREE.DirectionalLight(0xFFFFFF, 2);
+        light.position.set(3, -1, 0);
         scene.add(light);
 
         window.addEventListener("resize", () => {
@@ -72,7 +71,7 @@
         for (let i = 0; i < colors.length; i++) {
             const color = new THREE.MeshLambertMaterial({ color: colors[i] });
             const iso = new THREE.Mesh(icosahedron, color);
-            iso.rotation.set(0.015 * i, 0.015 * i, 0.015 * i);
+            iso.rotation.set(0.01 * i, 0.01 * i, 0.01 * i);
             scene.add(iso);
             isos.push(iso);
         }
@@ -81,7 +80,7 @@
             requestAnimationFrame(render);
 
             isos.forEach((iso, i) => {
-                const rotationSpeed = 0.00015 * (i + 1);
+                const rotationSpeed = 0.001 * (i/5);
                 iso.rotation.x += rotationSpeed;
                 iso.rotation.y += rotationSpeed;
                 iso.rotation.z += rotationSpeed;
