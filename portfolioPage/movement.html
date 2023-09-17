@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThreeJS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; }
+    canvas { display: block; }
+
+    .main { position: absolute; background-color: white; margin: 300px 5%; padding: 50px; }
+  </style>
+</head>
+<body>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.0/gsap.min.js"></script>
+<script src="three/addons/renderers/CSS3DRenderer.js"></script>
+
+<script>
+  var scene = new THREE.Scene();
+
+  var camera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 0.1, 10);
+  camera.position.z = 10;
+
+  var renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setClearColor("#FFFFFF");
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  var light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(0, 5, 5);
+  scene.add(light);
+
+  const ball = new THREE.SphereGeometry(.1, 32, 32);
+
+  // const land = new THREE.SphereGeometry(3, 32, 32);
+
+  let material1 = new THREE.MeshLambertMaterial({ color: "#ff0000" });
+  let material2 = new THREE.MeshLambertMaterial({ color: "#00ff00" });
+
+  const mesh1 = new THREE.Mesh(ball, material1);
+  const mesh2 = new THREE.Mesh(ball, material2);
+
+  scene.add(mesh1);
+  scene.add(mesh2);
+
+
+  function arrowUp() {
+    mesh1.position.y += 0.1
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.updateProjectionMatrix();
+
+  }
+
+  function arrowDown() {
+    mesh1.position.y -= 0.1
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.updateProjectionMatrix();
+
+  }
+
+  function arrowLeft() {
+    mesh1.position.x -= 0.1
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.updateProjectionMatrix();
+
+  }
+
+  function arrowRight() {
+    mesh1.position.x += 0.1
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.updateProjectionMatrix();
+
+  }
+
+  window.addEventListener("keyup", (event) => {
+    if (event.key === "ArrowUp") {
+      arrowUp();
+    }
+  });
+
+  window.addEventListener("keyup", (event) => {
+    if (event.key === "ArrowDown") {
+      arrowDown();
+    }
+  });
+
+  window.addEventListener("keyup", (event) => {
+    if (event.key === "ArrowLeft") {
+      arrowLeft();
+    }
+  });
+
+  window.addEventListener("keyup", (event) => {
+    if (event.key === "ArrowRight") {
+      arrowRight();
+    }
+  });
+
+
+  window.addEventListener("resize", () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+  });
+
+  const loop = () => {
+    renderer.render(scene, camera);
+    window.requestAnimationFrame(loop);
+  };
+  loop();
+
+</script>
+
+</body>
+</html>
