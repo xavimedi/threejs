@@ -1,0 +1,67 @@
+@media (max-width: 500px) {  /*MOBILE*/
+    .desktop{
+        content-visibility: hidden;
+    }
+
+    p{
+        position: absolute;
+        margin: 15px;
+    }
+
+    ul{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+    li{
+        list-style: none;
+        padding: 35px;
+    }
+    a{
+        text-decoration: none;
+        color: white;
+    }
+}
+
+@media (min-width: 501px) { /*DESKTOP*/
+    .mobile{
+        content-visibility: hidden;
+    }
+
+    nav{
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: start;
+    }
+
+    p{
+        margin-left: 15px;
+    }
+
+
+    h4{
+        position: relative;
+        margin: 5%;
+    }
+
+    a{
+        text-decoration: none;
+        color: white;
+        transition: .2s;
+    }
+
+    a:hover {
+        font-size: 1.5em;
+    }
+}
+
+body{
+    margin: 0;
+    font-family: 'Comfortaa', cursive;
+    color: white;
+}
+canvas {
+    display: block;
+}
+
