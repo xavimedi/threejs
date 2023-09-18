@@ -51,51 +51,22 @@
   gsap.to(mesh1.position, { x: 0, y: 0, z: 0 });
   // gsap.to(mesh2.rotation, { x: -.5, y: 0, z: 0 });
 
-  function move(option) {
-    switch(option){
-      case 1:{
-        mesh1.position.y += .1
-        break;
-      }
-      case 2:{
-        mesh1.position.x += .1
-        break;
-      }
-      case 3:{
-        mesh1.position.y -= .1
-        break;
-      }
-      case 4:{
-        mesh1.position.x -= .1
-        break;
-      }
-    }
-  }
-
   window.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowUp") {
-      move(1);
+    switch (event.key) {
+      case "ArrowUp":
+        mesh1.position.y += .3
+        break;
+      case "ArrowRight":
+        mesh1.position.x += .3
+        break;
+      case "ArrowDown":
+        mesh1.position.y -= .3
+        break;
+      case "ArrowLeft":
+        mesh1.position.x -= .3
+        break;
     }
   });
-
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowRight") {
-      move(2);
-    }
-  });
-
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowDown") {
-      move(3);
-    }
-  });
-
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") {
-      move(4);
-    }
-  });
-
 
   window.addEventListener("resize", () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
