@@ -1,6 +1,6 @@
 # three.js
 
-The purpose of this repository is to document the development of my exploration into three.js for my portfolio website.
+The purpose of this repository is to document the development of my exploration into three.js for my portfolio website, as well as my first game.
 
 ## Benefits
 
